@@ -234,6 +234,123 @@ body { background: var(--cream); color: var(--dark); min-height: 100vh; overflow
 .footer-logo { font-family: 'Fraunces', serif; color: white; font-size: 18px; }
 .footer p { color: rgba(255,255,255,0.4); font-size: 13px; }
 
+/* ===== AUTH PAGE ===== */
+.auth-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 24px;
+  padding: 110px 48px 48px;
+  background: linear-gradient(160deg, #FFFDF8 0%, #F4FAF7 50%, #EFF6FF 100%);
+}
+.auth-brand {
+  background: white;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 42px;
+}
+.auth-badge {
+  display: inline-block;
+  background: var(--green-pale);
+  color: var(--green-dark);
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 100px;
+  padding: 6px 14px;
+  margin-bottom: 16px;
+}
+.auth-brand h2 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+.auth-brand h2 em { color: var(--green); }
+.auth-brand p {
+  color: var(--mid);
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 480px;
+}
+.auth-points {
+  list-style: none;
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: var(--dark2);
+  font-size: 14px;
+}
+
+.auth-card {
+  background: white;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+  padding: 28px;
+}
+.auth-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  background: var(--sand);
+  border-radius: var(--radius-sm);
+  padding: 6px;
+  margin-bottom: 20px;
+}
+.auth-tab {
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--mid);
+  cursor: pointer;
+  transition: all .2s;
+}
+.auth-tab.active {
+  background: white;
+  color: var(--green-dark);
+  box-shadow: 0 4px 12px rgba(15,28,20,0.08);
+}
+.auth-form { display: flex; flex-direction: column; }
+.auth-form.hidden { display: none; }
+.auth-label {
+  font-size: 13px;
+  color: var(--mid);
+  font-weight: 600;
+  margin: 10px 0 6px;
+}
+.auth-input {
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-size: 14px;
+  color: var(--dark);
+  outline: none;
+  transition: all .2s;
+}
+.auth-input:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(79,195,138,0.15);
+}
+.auth-row {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--soft);
+}
+.auth-row a {
+  color: var(--green-dark);
+  text-decoration: none;
+}
+.auth-submit { width: 100%; margin-top: 16px; }
+.auth-back { width: 100%; margin-top: 12px; }
+
 /* ===== APP LAYOUT ===== */
 .sidebar {
   width: 260px; min-height: 100vh;
@@ -373,6 +490,94 @@ body { background: var(--cream); color: var(--dark); min-height: 100vh; overflow
 .alert-icon { font-size: 22px; }
 .alert-info strong { font-size: 13px; color: var(--dark); display: block; }
 .alert-info p { font-size: 12px; color: var(--mid); }
+
+/* ===== ADMIN DASHBOARD ===== */
+.admin-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 14px;
+  margin-bottom: 24px;
+}
+.admin-kpi-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+}
+.admin-kpi-icon { font-size: 24px; margin-bottom: 8px; }
+.admin-kpi-value {
+  font-family: 'Fraunces', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--dark);
+  line-height: 1.1;
+}
+.admin-kpi-label { margin-top: 6px; color: var(--soft); font-size: 12px; }
+
+.admin-layout {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+.admin-bars { display: flex; flex-direction: column; gap: 14px; }
+.admin-bar-row { display: flex; flex-direction: column; gap: 8px; }
+.admin-bar-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--mid);
+}
+.admin-bar-head strong { color: var(--dark); }
+.admin-bar-track {
+  height: 10px;
+  width: 100%;
+  border-radius: 100px;
+  background: var(--green-pale);
+  overflow: hidden;
+}
+.admin-bar-fill {
+  height: 100%;
+  border-radius: 100px;
+  background: linear-gradient(90deg, var(--green), var(--blue-light));
+}
+
+.admin-service-list { display: flex; flex-direction: column; gap: 10px; }
+.admin-service-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+.admin-rank {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--green-pale);
+  color: var(--green-dark);
+  font-size: 12px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.admin-service-info { flex: 1; }
+.admin-service-info strong { display: block; font-size: 13px; color: var(--dark); }
+.admin-service-info p { font-size: 11px; color: var(--soft); }
+.admin-price {
+  font-family: 'Fraunces', serif;
+  color: var(--green-dark);
+  font-size: 16px;
+  font-weight: 700;
+}
+.admin-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
 
 /* ===== HEALTH MODULE ===== */
 .health-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
@@ -544,11 +749,14 @@ body { background: var(--cream); color: var(--dark); min-height: 100vh; overflow
   .services-section { padding: 60px 24px; }
   .cta-banner { flex-direction: column; text-align: center; padding: 60px 24px; }
   .footer { flex-direction: column; gap: 12px; text-align: center; }
+  .auth-page { grid-template-columns: 1fr; padding: 90px 20px 24px; }
+  .auth-brand, .auth-card { padding: 24px; }
   .sidebar { position: fixed; left: 0; top: 0; bottom: 0; z-index: 200; transform: translateX(-100%); }
   .sidebar.open { transform: translateX(0); }
   .menu-toggle { display: block; }
   .module-shortcut-grid { grid-template-columns: repeat(3,1fr); }
   .dash-two-col { grid-template-columns: 1fr; }
+  .admin-layout { grid-template-columns: 1fr; }
   .checkout-layout { grid-template-columns: 1fr; }
   .module-content { padding: 20px 16px; }
 }
