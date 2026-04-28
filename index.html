@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clínica Veterinaria San Francisco</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <!-- LANDING PAGE -->
+  <section id="landing" class="page active">
+    <!-- Nav -->
+    <nav class="nav-bar">
+      <div class="nav-logo">
+        <div class="logo-icon">🐾</div>
+        <span class="logo-text">San Francisco</span>
+      </div>
+      <div class="nav-links">
+        <a href="#" onclick="showPage('app')">Servicios</a>
+        <a href="#" onclick="showPage('app')">Nosotros</a>
+        <a href="#" onclick="showPage('app')" class="btn-nav">Ingresar</a>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <div class="hero">
+      <div class="hero-blob blob1"></div>
+      <div class="hero-blob blob2"></div>
+      <div class="hero-blob blob3"></div>
+      <div class="hero-content">
+        <div class="hero-badge">✦ Clínica Veterinaria Premium</div>
+        <h1 class="hero-title">El mejor cuidado<br><em>para tu mascota</em></h1>
+        <p class="hero-subtitle">Salud, bienestar y amor para tu compañero de vida. Atención profesional, tecnología de punta y el cariño que merece.</p>
+        <div class="hero-cta">
+          <button class="btn-primary" onclick="showPage('app')">Comenzar ahora</button>
+          <button class="btn-ghost" onclick="scrollServices()">Ver servicios ↓</button>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><span class="stat-num">2.4k+</span><span class="stat-label">Mascotas atendidas</span></div>
+          <div class="stat-div"></div>
+          <div class="stat"><span class="stat-num">98%</span><span class="stat-label">Satisfacción</span></div>
+          <div class="stat-div"></div>
+          <div class="stat"><span class="stat-num">15+</span><span class="stat-label">Años de experiencia</span></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card-float card-float1">
+          <span>🩺</span>
+          <div><strong>Dr. Ruiz</strong><p>Disponible ahora</p></div>
+        </div>
+        <div class="hero-img-wrapper">
+          <div class="hero-img-bg"></div>
+          <div class="hero-paw-big">🐾</div>
+          <div class="hero-circles">
+            <div class="hc hc1"></div>
+            <div class="hc hc2"></div>
+            <div class="hc hc3"></div>
+          </div>
+        </div>
+        <div class="hero-card-float card-float2">
+          <span>💉</span>
+          <div><strong>Próx. vacuna</strong><p>En 3 días</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Services showcase -->
+    <div id="services-section" class="services-section">
+      <div class="section-header">
+        <div class="section-tag">Lo que ofrecemos</div>
+        <h2 class="section-title">Todo lo que<br>tu mascota necesita</h2>
+      </div>
+      <div class="services-grid">
+        <div class="service-card sc-health" onclick="showPage('app'); setModule('health')">
+          <div class="sc-icon">🏥</div>
+          <h3>Salud</h3>
+          <p>Consultas, vacunas, cirugías y laboratorio clínico especializado.</p>
+          <div class="sc-arrow">→</div>
+        </div>
+        <div class="service-card sc-beauty" onclick="showPage('app'); setModule('beauty')">
+          <div class="sc-icon">✂️</div>
+          <h3>Estética</h3>
+          <p>Baño, corte, spa canino y tratamientos premium de belleza.</p>
+          <div class="sc-arrow">→</div>
+        </div>
+        <div class="service-card sc-nutrition" onclick="showPage('app'); setModule('nutrition')">
+          <div class="sc-icon">🥗</div>
+          <h3>Nutrición</h3>
+          <p>Planes alimenticios personalizados y suplementos especializados.</p>
+          <div class="sc-arrow">→</div>
+        </div>
+        <div class="service-card sc-daycare" onclick="showPage('app'); setModule('daycare')">
+          <div class="sc-icon">🏡</div>
+          <h3>Guardería</h3>
+          <p>Cuidado diurno y nocturno con jardín y cámaras en vivo.</p>
+          <div class="sc-arrow">→</div>
+        </div>
+        <div class="service-card sc-funeral" onclick="showPage('app'); setModule('funeral')">
+          <div class="sc-icon">🌿</div>
+          <h3>Servicios Funerarios</h3>
+          <p>Acompañamiento digno y respetuoso en el último momento.</p>
+          <div class="sc-arrow">→</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Banner -->
+    <div class="cta-banner">
+      <div class="cta-content">
+        <h2>¿Listo para empezar?</h2>
+        <p>Registra a tu mascota y accede a todos nuestros servicios.</p>
+        <button class="btn-primary" onclick="showPage('app')">Crear cuenta gratis</button>
+      </div>
+      <div class="cta-paws">🐾🐾🐾</div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-logo">🐾 San Francisco</div>
+      <p>© 2025 Clínica Veterinaria San Francisco. Medellín, Colombia.</p>
+    </footer>
+  </section>
+
+  <!-- APP -->
+  <section id="app" class="page">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo">
+        <div class="logo-icon">🐾</div>
+        <span>San Francisco</span>
+      </div>
+      <div class="sidebar-pet">
+        <div class="pet-avatar">🐶</div>
+        <div>
+          <strong>Luna</strong>
+          <span>Golden Retriever · 4 años</span>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="#" class="snav active" onclick="setModule('dashboard')"><span>🏠</span> Inicio</a>
+        <a href="#" class="snav" onclick="setModule('health')"><span>🏥</span> Salud</a>
+        <a href="#" class="snav" onclick="setModule('beauty')"><span>✂️</span> Estética</a>
+        <a href="#" class="snav" onclick="setModule('nutrition')"><span>🥗</span> Nutrición</a>
+        <a href="#" class="snav" onclick="setModule('daycare')"><span>🏡</span> Guardería</a>
+        <a href="#" class="snav" onclick="setModule('funeral')"><span>🌿</span> Funerarios</a>
+        <a href="#" class="snav" onclick="setModule('catalog')"><span>🛒</span> Catálogo</a>
+        <a href="#" class="snav" onclick="setModule('schedule')"><span>📅</span> Agenda</a>
+        <a href="#" class="snav" onclick="setModule('checkout')"><span>💳</span> Facturación</a>
+      </nav>
+      <a href="#" class="snav snav-back" onclick="showPage('landing')"><span>←</span> Volver al inicio</a>
+    </aside>
+
+    <!-- Main content -->
+    <main class="app-main">
+      <!-- Top bar -->
+      <div class="topbar">
+        <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+        <div class="topbar-title" id="module-title">Dashboard</div>
+        <div class="topbar-right">
+          <button class="cart-btn" onclick="setModule('checkout')">🛒 <span id="cart-count" class="cart-badge">0</span></button>
+          <div class="avatar-small">MG</div>
+        </div>
+      </div>
+
+      <!-- Module content -->
+      <div class="module-content" id="module-content">
+        <!-- Loaded dynamically by JS -->
+      </div>
+    </main>
+  </section>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
