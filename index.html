@@ -20,7 +20,7 @@
       <div class="nav-links">
         <a href="#" onclick="showPage('app')">Servicios</a>
         <a href="#" onclick="showPage('app')">Nosotros</a>
-        <a href="#" onclick="showPage('app')" class="btn-nav">Ingresar</a>
+        <a href="#" onclick="showPage('auth')" class="btn-nav">Ingresar</a>
       </div>
     </nav>
 
@@ -34,7 +34,7 @@
         <h1 class="hero-title">El mejor cuidado<br><em>para tu mascota</em></h1>
         <p class="hero-subtitle">Salud, bienestar y amor para tu compañero de vida. Atención profesional, tecnología de punta y el cariño que merece.</p>
         <div class="hero-cta">
-          <button class="btn-primary" onclick="showPage('app')">Comenzar ahora</button>
+          <button class="btn-primary" onclick="showPage('auth')">Comenzar ahora</button>
           <button class="btn-ghost" onclick="scrollServices()">Ver servicios ↓</button>
         </div>
         <div class="hero-stats">
@@ -111,7 +111,7 @@
       <div class="cta-content">
         <h2>¿Listo para empezar?</h2>
         <p>Registra a tu mascota y accede a todos nuestros servicios.</p>
-        <button class="btn-primary" onclick="showPage('app')">Crear cuenta gratis</button>
+        <button class="btn-primary" onclick="showPage('auth')">Crear cuenta gratis</button>
       </div>
       <div class="cta-paws">🐾🐾🐾</div>
     </div>
@@ -120,6 +120,55 @@
       <div class="footer-logo">🐾 San Francisco</div>
       <p>© 2025 Clínica Veterinaria San Francisco. Medellín, Colombia.</p>
     </footer>
+  </section>
+
+  <!-- AUTH -->
+  <section id="auth" class="page">
+    <div class="auth-page">
+      <div class="auth-brand">
+        <div class="auth-badge">🐾 Acceso seguro</div>
+        <h2>Bienvenido a<br><em>San Francisco</em></h2>
+        <p>Ingresa para gestionar citas, historial médico y servicios de tu mascota en un solo lugar.</p>
+        <ul class="auth-points">
+          <li>✅ Historial médico centralizado</li>
+          <li>✅ Agenda y recordatorios automáticos</li>
+          <li>✅ Facturación y reportes rápidos</li>
+        </ul>
+      </div>
+
+      <div class="auth-card">
+        <div class="auth-tabs">
+          <button id="tab-login" class="auth-tab active" onclick="setAuthTab('login')">Iniciar sesión</button>
+          <button id="tab-register" class="auth-tab" onclick="setAuthTab('register')">Crear cuenta</button>
+        </div>
+
+        <form id="auth-login-form" class="auth-form" onsubmit="return false;">
+          <label class="auth-label">Correo electrónico</label>
+          <input class="auth-input" type="email" placeholder="correo@ejemplo.com" required />
+          <label class="auth-label">Contraseña</label>
+          <input class="auth-input" type="password" placeholder="••••••••" required />
+          <div class="auth-row">
+            <label><input type="checkbox" /> Recordarme</label>
+            <a href="#">¿Olvidaste tu contraseña?</a>
+          </div>
+          <button class="btn-primary auth-submit" type="button">Ingresar al sistema</button>
+        </form>
+
+        <form id="auth-register-form" class="auth-form hidden" onsubmit="return false;">
+          <label class="auth-label">Nombre completo</label>
+          <input class="auth-input" type="text" placeholder="María García" required />
+          <label class="auth-label">Correo electrónico</label>
+          <input class="auth-input" type="email" placeholder="correo@ejemplo.com" required />
+          <label class="auth-label">Teléfono</label>
+          <input class="auth-input" type="tel" placeholder="3001234567" required />
+          <label class="auth-label">Contraseña</label>
+          <input class="auth-input" type="password" placeholder="Crea una contraseña" required />
+          <button class="btn-primary auth-submit" type="button">Crear cuenta</button>
+        </form>
+
+        <button class="btn-ghost auth-back" onclick="showPage('landing')">← Volver al inicio</button>
+      </div>
+    </div>
   </section>
 
   <!-- APP -->
@@ -139,6 +188,7 @@
       </div>
       <nav class="sidebar-nav">
         <a href="#" class="snav active" onclick="setModule('dashboard')"><span>🏠</span> Inicio</a>
+        <a href="#" class="snav" onclick="setModule('admin')"><span>📊</span> Administrativo</a>
         <a href="#" class="snav" onclick="setModule('health')"><span>🏥</span> Salud</a>
         <a href="#" class="snav" onclick="setModule('beauty')"><span>✂️</span> Estética</a>
         <a href="#" class="snav" onclick="setModule('nutrition')"><span>🥗</span> Nutrición</a>
