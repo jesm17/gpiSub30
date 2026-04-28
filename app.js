@@ -12,12 +12,26 @@ function showPage(id) {
   function scrollServices() {
     document.getElementById('services-section').scrollIntoView({ behavior: 'smooth' });
   }
-  
+
+  function setAuthTab(tab) {
+    const loginTab = document.getElementById('tab-login');
+    const registerTab = document.getElementById('tab-register');
+    const loginForm = document.getElementById('auth-login-form');
+    const registerForm = document.getElementById('auth-register-form');
+    if (!loginTab || !registerTab || !loginForm || !registerForm) return;
+
+    const isLogin = tab === 'login';
+    loginTab.classList.toggle('active', isLogin);
+    registerTab.classList.toggle('active', !isLogin);
+    loginForm.classList.toggle('hidden', !isLogin);
+    registerForm.classList.toggle('hidden', isLogin);
+  }
+
   function setModule(mod) {
     currentModule = mod;
     // Update sidebar active
     document.querySelectorAll('.snav').forEach(n => n.classList.remove('active'));
-    const map = { dashboard:'Inicio',health:'Salud',beauty:'Estética',nutrition:'Nutrición',daycare:'Guardería',funeral:'Funerarios',catalog:'Catálogo',schedule:'Agenda',checkout:'Facturación' };
+    const map = { dashboard:'Inicio',admin:'Administrativo',health:'Salud',beauty:'Estética',nutrition:'Nutrición',daycare:'Guardería',funeral:'Funerarios',catalog:'Catálogo',schedule:'Agenda',checkout:'Facturación' };
     document.getElementById('module-title').textContent = map[mod] || mod;
     document.querySelectorAll('.snav').forEach(n => {
       if (n.getAttribute('onclick')?.includes(mod)) n.classList.add('active');
@@ -26,6 +40,7 @@ function showPage(id) {
     el.innerHTML = '';
     switch(mod) {
       case 'dashboard': el.innerHTML = renderDashboard(); break;
+      case 'admin': el.innerHTML = renderAdminDashboard(); break;
       case 'health': el.innerHTML = renderHealth(); break;
       case 'beauty': el.innerHTML = renderCatalog('estetica','Estética','✂️','Baño, corte y tratamientos de spa para mantener a tu mascota impecable.'); break;
       case 'nutrition': el.innerHTML = renderCatalog('nutricion','Nutrición','🥗','Planes alimenticios y asesoría nutricional especializada.'); break;
@@ -82,11 +97,12 @@ function showPage(id) {
     <div style="margin-bottom:20px">
       <div class="card-title">Acceso rápido</div>
       <div class="module-shortcut-grid">
+        <div class="module-shortcut" onclick="setModule('admin')"><div class="ms-icon">📊</div><div class="ms-label">Admin</div></div>
         <div class="module-shortcut" onclick="setModule('health')"><div class="ms-icon">🏥</div><div class="ms-label">Salud</div></div>
         <div class="module-shortcut" onclick="setModule('beauty')"><div class="ms-icon">✂️</div><div class="ms-label">Estética</div></div>
         <div class="module-shortcut" onclick="setModule('nutrition')"><div class="ms-icon">🥗</div><div class="ms-label">Nutrición</div></div>
         <div class="module-shortcut" onclick="setModule('daycare')"><div class="ms-icon">🏡</div><div class="ms-label">Guardería</div></div>
-        <div class="module-shortcut" onclick="setModule('funeral')"><div class="ms-icon">🌿</div><div class="ms-label">Funerarios</div></div>
+        <div class="module-shortcut" onclick="setModule('catalog')"><div class="ms-icon">🛒</div><div class="ms-label">Catálogo</div></div>
       </div>
     </div>
   
@@ -116,6 +132,100 @@ function showPage(id) {
             <div class="alert-info"><strong>${a.title}</strong><p>${a.msg}</p></div>
           </div>
         `).join('')}
+      </div>
+    </div>`;
+  }
+
+  function renderAdminDashboard() {
+    const citasAgendadas = CITAS.filter(c => c.estado === 'agendada').length;
+    const citasFinalizadas = CITAS.filter(c => c.estado === 'finalizada').length;
+    const serviciosActivos = SERVICIOS.length;
+    const ticketPromedio = Math.round(SERVICIOS.reduce((acc, s) => acc + s.precio, 0) / Math.max(serviciosActivos, 1));
+    const ingresosEstimados = CITAS.reduce((acc, cita) => {
+      const servicio = SERVICIOS.find(s => cita.servicio.toLowerCase().includes(s.nombre.toLowerCase().split(' ')[0]));
+      return acc + (servicio?.precio || 65000);
+    }, 0);
+    const categorias = [
+      { key: 'salud', label: 'Salud' },
+      { key: 'estetica', label: 'Estética' },
+      { key: 'nutricion', label: 'Nutrición' },
+      { key: 'guarderia', label: 'Guardería' },
+      { key: 'funerarios', label: 'Funerarios' }
+    ];
+
+    return `
+    <div class="module-hero" data-emoji="📊">
+      <h2>Dashboard Administrativo</h2>
+      <p>Vista general de operación, ingresos estimados y servicios más importantes de la clínica.</p>
+    </div>
+
+    <div class="admin-kpi-grid">
+      <div class="admin-kpi-card">
+        <div class="admin-kpi-icon">💰</div>
+        <div class="admin-kpi-value">$${ingresosEstimados.toLocaleString('es-CO')}</div>
+        <div class="admin-kpi-label">Ingresos estimados del periodo</div>
+      </div>
+      <div class="admin-kpi-card">
+        <div class="admin-kpi-icon">🧾</div>
+        <div class="admin-kpi-value">$${ticketPromedio.toLocaleString('es-CO')}</div>
+        <div class="admin-kpi-label">Ticket promedio por servicio</div>
+      </div>
+      <div class="admin-kpi-card">
+        <div class="admin-kpi-icon">📅</div>
+        <div class="admin-kpi-value">${citasAgendadas}</div>
+        <div class="admin-kpi-label">Citas agendadas</div>
+      </div>
+      <div class="admin-kpi-card">
+        <div class="admin-kpi-icon">✅</div>
+        <div class="admin-kpi-value">${citasFinalizadas}</div>
+        <div class="admin-kpi-label">Citas finalizadas</div>
+      </div>
+    </div>
+
+    <div class="admin-layout">
+      <div class="card">
+        <div class="card-title">📈 Rendimiento por categoría</div>
+        <div class="admin-bars">
+          ${categorias.map((cat, idx) => {
+            const total = SERVICIOS.filter(s => s.categoria === cat.key).length;
+            const percent = Math.min(100, Math.round((total / Math.max(SERVICIOS.length, 1)) * 100) + (idx * 6));
+            return `
+            <div class="admin-bar-row">
+              <div class="admin-bar-head">
+                <span>${cat.label}</span>
+                <strong>${percent}%</strong>
+              </div>
+              <div class="admin-bar-track">
+                <div class="admin-bar-fill" style="width:${percent}%"></div>
+              </div>
+            </div>`;
+          }).join('')}
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">🏅 Servicios destacados</div>
+        <div class="admin-service-list">
+          ${SERVICIOS.slice(0, 5).map((s, i) => `
+            <div class="admin-service-item">
+              <span class="admin-rank">${i + 1}</span>
+              <div class="admin-service-info">
+                <strong>${s.nombre}</strong>
+                <p>${s.categoria} · ${s.duracion}</p>
+              </div>
+              <span class="admin-price">$${s.precio.toLocaleString('es-CO')}</span>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🧑‍💼 Gestión rápida</div>
+      <div class="admin-actions">
+        <button class="btn-ghost">Exportar reporte PDF</button>
+        <button class="btn-ghost">Descargar base de clientes</button>
+        <button class="btn-primary">Crear campaña de fidelización</button>
       </div>
     </div>`;
   }
